@@ -1,0 +1,31 @@
+server:
+  port: 18605
+  max-http-header-size: 8192
+#配置日志
+logging:
+  level:
+    root: info
+    com.euler: debug
+    org.springfromework.web: info
+  config: /data/config/logback-spring.xml  # 指定logback-spring.xml文件路径
+spring:
+  application:
+    name: kudu-spring-boot-starter
+  mvc.async.request-timeout: 20000
+  http:
+    encoding:
+      charset: UTF-8
+      force: true
+      enabled: true
+kudu:
+  #  ===================== 必要配置 ======================= #
+  #kuduAddress
+  kudu-address: 10.101.15.229, 10.101.15.230, 10.101.15.231
+
+  #  ==================== 非必要配置 ====================== #
+  # 雪花算法节点id 取值 [0,1023] after v1.1.0 默认值35
+  # 如果多节点使用getId方法获取全局唯一id，最好配，默认 35，取值范围 [0,1024）
+  worker-id: 1
+
+  # 使用KuduImpalaTemplate来操作Impala创建的Kudu表则最好设置默认DB，否则必须使用带dbName参数的重载方法
+  default-data-base: impala_kudu_db
